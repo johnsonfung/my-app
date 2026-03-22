@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Restaurant, Review } from '../types'
-import { getRestaurants, getReviews } from '../api/client'
+import { getRestaurants, getAllReviews } from '../api/client'
 import RestaurantCard from '../components/restaurant/RestaurantCard'
 import { ALLERGENS } from '../data/allergens'
 
@@ -11,7 +11,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    Promise.all([getRestaurants(), fetch('/api/reviews').then((r) => r.json())])
+    Promise.all([getRestaurants(), getAllReviews()])
       .then(([rests, revs]) => {
         setRestaurants(rests)
         setReviews(revs)

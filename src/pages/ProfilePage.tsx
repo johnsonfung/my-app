@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Restaurant, Review } from '../types'
-import { getRestaurants } from '../api/client'
+import { getRestaurants, getAllReviews } from '../api/client'
 import { useStore } from '../store/useStore'
 import AllergenBadge from '../components/restaurant/AllergenBadge'
 import ProtectedRoute from '../components/auth/ProtectedRoute'
@@ -13,10 +13,7 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    Promise.all([
-      getRestaurants(),
-      fetch('/api/reviews').then((r) => r.json()),
-    ])
+    Promise.all([getRestaurants(), getAllReviews()])
       .then(([rests, revs]) => {
         setRestaurants(rests)
         setReviews(revs)

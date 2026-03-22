@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Restaurant, Review } from '../types'
-import { getRestaurants } from '../api/client'
+import { getRestaurants, getAllReviews } from '../api/client'
 import { useStore } from '../store/useStore'
 import RestaurantList from '../components/restaurant/RestaurantList'
 import AllergenFilter from '../components/filter/AllergenFilter'
@@ -14,10 +14,7 @@ export default function BrowsePage() {
   const { selectedAllergens, searchQuery, sortBy, setSortBy } = useStore()
 
   useEffect(() => {
-    Promise.all([
-      getRestaurants(),
-      fetch('/api/reviews').then((r) => r.json()),
-    ])
+    Promise.all([getRestaurants(), getAllReviews()])
       .then(([rests, revs]) => {
         setRestaurants(rests)
         setReviews(revs)

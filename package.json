@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "server": "json-server --watch db.json --port 3001",
-    "start": "concurrently \"npm run server\" \"npm run dev\""
+    "start": "vite"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
